@@ -16,9 +16,6 @@ vendor/etc/init/vendor.qti.cdsprpc-service.rc
 -vendor/lib64/libsdsprpc.so
 
 # ADSP modules
--vendor/lib/rfsa/adsp/capi_v2_aptX_CLHDAD_Encoder.so
--vendor/lib/rfsa/adsp/capi_v2_aptX_Classic.so
--vendor/lib/rfsa/adsp/capi_v2_aptX_HD.so
 vendor/lib/rfsa/adsp/dirac_resource.dar
 -vendor/lib/rfsa/adsp/libVC1Dec.so
 -vendor/lib/rfsa/adsp/libVC1DecDsp_skel.so
@@ -68,23 +65,30 @@ system_ext/framework/audiosphere.jar
 # Bluetooth
 -vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti
 vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc
+-vendor/lib/hw/audio.bluetooth_qti.default.so
 -vendor/lib/hw/vendor.qti.hardware.bluetooth_audio@2.0-impl.so
 -vendor/lib/hw/vendor.qti.hardware.bluetooth_audio@2.1-impl.so
+-vendor/lib/btaudio_offload_if.so
 -vendor/lib/libbluetooth_audio_session_qti.so
 -vendor/lib/libbluetooth_audio_session_qti_2_1.so
 -vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-qti.so
--vendor/lib64/hw/vendor.qti.hardware.bluetooth_sar@1.1-impl.so
--vendor/lib64/hw/vendor.qti.hardware.btconfigstore@1.0-impl.so
--vendor/lib64/hw/vendor.qti.hardware.btconfigstore@2.0-impl.so
+-vendor/lib64/libbt-hidlclient.so
 -vendor/lib64/libbtnv.so
 -vendor/lib64/libsoc_helper.so
 -vendor/lib64/libsoc_helper_jni.so
+
+# Bluetooth (aptX)
+-vendor/lib/rfsa/adsp/capi_v2_aptX_CLHDAD_Encoder.so
+-vendor/lib/rfsa/adsp/capi_v2_aptX_Classic.so
+-vendor/lib/rfsa/adsp/capi_v2_aptX_HD.so
+
+# Bluetooth (Configstore)
+-vendor/lib64/hw/vendor.qti.hardware.btconfigstore@2.0-impl.so
+
+# Bluetooth (SAR)
+-vendor/lib64/hw/vendor.qti.hardware.bluetooth_sar@1.1-impl.so
 -vendor/lib64/vendor.qti.hardware.bluetooth_sar@1.0.so
 -vendor/lib64/vendor.qti.hardware.bluetooth_sar@1.1.so
-
-# Bluetooth (aptX) - from Pixel 4A RP1A.200720.011
--system_ext/lib64/libaptXHD_encoder.so|e13fa70c97caaa24d061678bdee608eb8850a69e
--system_ext/lib64/libaptX_encoder.so|df1c89d7af1bb35808d5fe3496b04ba066c10cbc
 
 # Charger
 -vendor/bin/hvdcp_opti
@@ -447,6 +451,26 @@ vendor/etc/init/android.hardware.neuralnetworks@1.3-service-qti.rc
 -vendor/bin/pm-service
 -vendor/lib64/libperipheral_client.so
 
+# Dolby - from sofiap_ao_eea-user-11-RPR31.Q4U-20-26-2-a10bb-release-keys
+-system_ext/app/MotoDolbyV3/MotoDolbyV3.apk|f6c483f79d9b8713ff03f475dad7bcf2c3e63ba5
+system_ext/etc/permissions/com.motorola.dolby.dolbyui.features.xml|7eafc481b604505f057931a6f83c507e357886b3
+system_ext/etc/sysconfig/hiddenapi-whitelist-com.motorola.dolby.dolbyui.xml|ab4600814879c626a410e607107829faceec9d2c
+system_ext/etc/permissions/com.dolby.daxservice.xml|86d4a12d3049d9de41db123026404f0c0bc40581
+-system_ext/priv-app/daxService/daxService.apk|14c00b94bad99462135cfe8f3da1bc71d8f72518
+vendor/bin/hw/vendor.dolby.hardware.dms@1.0-service|7207a97fd3f00c854be4e4ddee98c881c61c2266
+vendor/etc/init/vendor.dolby.hardware.dms@1.0-service.rc|e91adb7565e4fa126880917ed4d8f9ba4f9391d9
+vendor/lib/soundfx/libswdap.so|0bd57dec350fb40ef3222723e59a7d5fe503ca7f
+vendor/lib/libdapparamstorage.so|6fce779d3b4f21783d3d96e82f9b185107bbab38
+vendor/lib/libstagefrightdolby.so|130b9da07e3c4a4ec04142049246eba18f1c350f
+vendor/lib/vendor.dolby.hardware.dms@1.0.so|c1d8cea6e281a2d5c497b24d55f5703f0bcc2860
+vendor/lib64/soundfx/libswdap.so|be0056eb6359158a5f6aa5e2a8ed0fa260a82949
+vendor/lib64/libdapparamstorage.so|c54376a54043115f11154b47b10f6156f904ed00
+vendor/lib64/libdlbdsservice.so|77e3a0d44ce95c7e5139badb94087ea58211b022
+vendor/lib64/vendor.dolby.hardware.dms@1.0-impl.so|7afb6907a83aa7c9faa7308ae5b39338eadac1c8
+vendor/lib64/vendor.dolby.hardware.dms@1.0.so|f3593ce869d036f98ddc7fc8223a8b55dcf0ca36
+
+
+
 # QMI
 system_ext/etc/permissions/qti_permissions.xml
 -vendor/bin/irsc_util
@@ -589,5 +613,86 @@ vendor/app/TimeService/TimeService.apk
 vendor/etc/init/init.time_daemon.rc
 -vendor/lib64/libtime_genoff.so
 
+# WiFi Display
+-framework/WfdCommon.jar
+-system_ext/bin/wfdservice
+system_ext/etc/init/wfdservice.rc
+system_ext/etc/permissions/wfd-system-ext-privapp-permissions-qti.xml
+system_ext/etc/seccomp_policy/wfdservice.policy
+system_ext/etc/wfdconfigsink.xml
+-system_ext/lib/libmmosal.so;MODULE=libmmosal_system_ext
+-system_ext/lib/libmmparser_lite.so
+-system_ext/lib/libmmrtpdecoder.so
+-system_ext/lib/libmmrtpencoder.so
+-system_ext/lib/libwfdavenhancements.so
+-system_ext/lib/libwfdcommonutils.so
+-system_ext/lib/libwfdconfigutils.so
+-system_ext/lib/libwfddisplayconfig.so
+-system_ext/lib/libwfdmminterface.so
+-system_ext/lib/libwfdmmsink.so
+-system_ext/lib/libwfdmmsrc_system.so
+-system_ext/lib/libwfdrtsp.so
+-system_ext/lib/libwfdservice.so
+-system_ext/lib/libwfdsinksm.so
+-system_ext/lib/libwfduibcinterface.so
+-system_ext/lib/libwfduibcsink.so
+-system_ext/lib/libwfduibcsinkinterface.so
+-system_ext/lib/libwfduibcsrc.so
+-system_ext/lib/libwfduibcsrcinterface.so
+-system_ext/lib/vendor.qti.hardware.wifidisplaysession@1.0.so;MODULE=vendor.qti.hardware.wifidisplaysession@1.0_system_ext
+-system_ext/lib64/libmmosal.so;MODULE=libmmosal_system_ext
+-system_ext/lib64/libmmparser_lite.so
+-system_ext/lib64/libmmrtpdecoder.so
+-system_ext/lib64/libmmrtpencoder.so
+-system_ext/lib64/libwfdclient.so
+-system_ext/lib64/libwfdcommonutils.so
+-system_ext/lib64/libwfdconfigutils.so
+-system_ext/lib64/libwfddisplayconfig.so
+-system_ext/lib64/libwfdmminterface.so
+-system_ext/lib64/libwfdmmsink.so
+-system_ext/lib64/libwfdnative.so
+-system_ext/lib64/libwfdrtsp.so
+-system_ext/lib64/libwfdsinksm.so
+-system_ext/lib64/libwfduibcinterface.so
+-system_ext/lib64/libwfduibcsink.so
+-system_ext/lib64/libwfduibcsinkinterface.so
+-system_ext/lib64/libwfduibcsrc.so
+-system_ext/lib64/libwfduibcsrcinterface.so
+-system_ext/priv-app/WfdService/WfdService.apk
+-vendor/bin/wfdvndservice
+-vendor/bin/wifidisplayhalservice
+vendor/etc/init/com.qualcomm.qti.wifidisplayhal@1.0-service.rc
+vendor/etc/init/wfdvndservice.rc
+vendor/etc/seccomp_policy/wfdhdcphalservice.policy
+vendor/etc/seccomp_policy/wfdvndservice.policy
+vendor/etc/seccomp_policy/wifidisplayhalservice.policy
+vendor/etc/wfdconfig.xml
+-vendor/lib/libFileMux_proprietary.so
+-vendor/lib/libmmrtpdecoder_proprietary.so
+-vendor/lib/libmmrtpencoder_proprietary.so
+-vendor/lib/libwfdcodecv4l2_proprietary.so
+-vendor/lib/libwfdcommonutils_proprietary.so
+-vendor/lib/libwfdconfigutils_proprietary.so
+-vendor/lib/libwfddisplayconfig_proprietary.so
+-vendor/lib/libwfdhdcpcp.so
+-vendor/lib/libwfdhdcpservice_proprietary.so
+-vendor/lib/libwfdmminterface_proprietary.so
+-vendor/lib/libwfdmmservice_proprietary.so
+-vendor/lib/libwfdmmsrc_proprietary.so
+-vendor/lib/libwfdmodulehdcpsession.so
+-vendor/lib/libwfdrtsp_proprietary.so
+-vendor/lib/libwfdsessionmodule.so
+-vendor/lib/libwfdsourcesession_proprietary.so
+-vendor/lib/libwfdsourcesm_proprietary.so
+-vendor/lib/libwfduibcinterface_proprietary.so
+-vendor/lib/libwfduibcsink_proprietary.so
+-vendor/lib/libwfduibcsinkinterface_proprietary.so
+-vendor/lib/libwfduibcsrc_proprietary.so
+-vendor/lib/libwfduibcsrcinterface_proprietary.so
+-vendor/lib/libwfdutils_proprietary.so
+-vendor/lib/vendor.qti.hardware.wifidisplaysession@1.0.so;MODULE=vendor.qti.hardware.wifidisplaysession@1.0_vendor
+-vendor/lib/vendor.qti.hardware.wifidisplaysessionl@1.0-halimpl.so
+
 # Xiaomi MAC
 -vendor/bin/nv_mac
+

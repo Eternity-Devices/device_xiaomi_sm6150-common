@@ -149,6 +149,11 @@ TARGET_RELEASETOOLS_EXTENSIONS := $(COMMON_PATH)
 TARGET_SEPOLICY_DIR := msmsteppe
 include device/qcom/sepolicy_vndr/SEPolicy.mk
 
+# Temporary ignore neverallows
+SELINUX_IGNORE_NEVERALLOWS := true
+
+
+
 SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/public
 BOARD_VENDOR_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor
 SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/private
